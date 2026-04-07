@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func startRepl() {
+func main() {
 	reader := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
