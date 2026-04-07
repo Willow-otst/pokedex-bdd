@@ -1,17 +1,31 @@
 package main
 
-import "fmt"
-import "strings"
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 
-func main() {
-	fmt.Println("Hello, World!")
+func startRepl() {
+	reader := bufio.NewScanner(os.Stdin)
+	for {
+		fmt.Print("Pokedex > ")
+		reader.Scan()
+
+		words := cleanInput(reader.Text())
+		if len(words) == 0 {
+			continue
+		}
+
+		commandName := words[0]
+
+		fmt.Printf("Your command was: %s\n", commandName)
+	}
 }
 
 func cleanInput(text string) []string {
-	// Trim whitespace, lowercase, then split on any whitespace
-	text = strings.TrimSpace(strings.ToLower(text))
-	if text == "" {
-		return []string{}
-	}
-	return strings.Fields(text)
+	output := strings.ToLower(text)
+	words := strings.Fields(output)
+	return words
 }
